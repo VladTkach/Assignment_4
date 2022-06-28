@@ -5,7 +5,6 @@
 #include <fstream>
 #include <queue>
 #include "FileCompressor.h"
-#include "Writer.h"
 
 using namespace std;
 

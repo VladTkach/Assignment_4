@@ -2,6 +2,11 @@
 
 void FileCompressor::compressFile(string &name, ofstream &outFile) {
     ifstream inFile(name, ios::ate | ios::binary);
+    if (!inFile.is_open()){
+        cout << "Fail" << endl;
+        return;
+    }
+    Writer::writeName(name, outFile);
     int fil_size = (int)inFile.tellg();
 
     char next;
@@ -32,4 +37,5 @@ void FileCompressor::compressFile(string &name, ofstream &outFile) {
         repeat++;
     }
     Writer::writeElements(help, outFile);
+    cout << "Done" << endl;
 }

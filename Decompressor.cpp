@@ -5,18 +5,19 @@ void Decompressor::decompress(string &name) {
     int file_size = (int)inFile.tellg();
 
     int start = 1;
-    char current;
     string new_name;
-
-    inFile.seekg(0);
-    inFile.read((char *) &current, sizeof(char));
-
+    int sum = 0;
+    inFile.seekg(1);
     while (start != file_size){
         new_name = Reader::getName(inFile, start);
+        cout << "Getting out file" << new_name << "...";
         FileDecompressor::decompressFile(inFile, new_name, start, file_size);
+        cout << " Done" << endl;
         start = (int)inFile.tellg();
+        sum++;
     }
     inFile.close();
+    cout << sum << " files written";
 }
 
 
