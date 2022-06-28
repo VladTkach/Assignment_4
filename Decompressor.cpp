@@ -2,20 +2,19 @@
 
 void Decompressor::decompress(string &name) {
     ifstream inFile(name, ios::ate | ios::binary);
-    int file_size = inFile.tellg();
-    cout << file_size << endl;
-    inFile.seekg(0);
-    char current;
-    inFile.read((char *) &current, sizeof(char));
-    cout << "c-" << (int) current << endl;
+    int file_size = (int)inFile.tellg();
+
     int start = 1;
+    char current;
     string new_name;
+
+    inFile.seekg(0);
+    inFile.read((char *) &current, sizeof(char));
 
     while (start != file_size){
         new_name = getName(inFile, start);
-        cout << new_name << " " << start << endl;
         decompressFile(inFile, new_name, start, file_size);
-        start = inFile.tellg();
+        start = (int)inFile.tellg();
     }
     inFile.close();
 }
@@ -27,7 +26,7 @@ string Decompressor::getName(ifstream &inFile, int &start) {
         inFile.read((char *) &current, sizeof(char));
         name += current;
     } while (current != 0);
-    start += name.length();
+    start += (int)name.length();
     name.erase(name.length() - 1);
     return name;
 }
@@ -39,14 +38,11 @@ void Decompressor::decompressFile(ifstream &inFile, string &fileName, int &start
     for (int i = start; i < file_size; ++i) {
         inFile.seekg(i);
         inFile.read((char *) &repeat, sizeof(char));
-        cout << "repeat" << (int) repeat << endl;
         if (repeat == 0) {
-            cout << "stop";
             start = i;
-            cout << "start - " << start << endl;
             break;
         }
-        if (repeat == -128) {
+        else if (repeat == -128) {
             inFile.read((char *) &repeat, sizeof(char));
             for (int j = 0; j < repeat; ++j) {
                 inFile.read((char *) &current, sizeof(char));
