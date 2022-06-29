@@ -1,4 +1,3 @@
-//#include "func.h"
 #include "manager.h"
 
 int main(int size, char* arg[]) {

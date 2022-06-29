@@ -3,7 +3,7 @@
 #include <iostream>
 #include <fstream>
 #include <queue>
-
+#define MINUS 128
 using namespace std;
 
 class Writer {

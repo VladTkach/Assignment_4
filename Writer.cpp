@@ -11,7 +11,7 @@ void Writer::writeName(string &name, ofstream &outFile) {
 
 void Writer::writeElements(queue<char> &elements, ofstream &outFile) {
     int temp = (int) elements.size();
-    int minus = 128;
+    int minus = MINUS;
     outFile.write((char *) &minus, sizeof(char));
     outFile.write((char *) &temp, sizeof(char));
     while (!elements.empty()) {

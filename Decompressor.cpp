@@ -2,6 +2,10 @@
 
 void Decompressor::decompress(string &name) {
     ifstream inFile(name, ios::ate | ios::binary);
+    if (!inFile.is_open()){
+        cout << "Wrong file name - " << name;
+        return;
+    }
     int file_size = (int)inFile.tellg();
 
     int start = 1;

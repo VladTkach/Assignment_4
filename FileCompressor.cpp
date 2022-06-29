@@ -12,17 +12,16 @@ void FileCompressor::compressFile(string &name, ofstream &outFile) {
     char next;
     char current;
     int repeat = 1;
-
     queue<char> help;
     for (int i = 0; i < fil_size; ++i) {
         inFile.seekg(i);
         inFile.read((char *) &current, sizeof(char));
         next = (char) inFile.peek();
 
-        if (next != current || repeat >= 127) {
+        if (next != current || repeat >= LIMIT) {
             if (repeat == 1) {
                 help.push(current);
-                if(help.size() == 127){
+                if(help.size() == LIMIT){
                     Writer::writeElements(help, outFile);
                 }
             } else {
