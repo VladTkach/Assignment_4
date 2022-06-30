@@ -9,6 +9,6 @@
 using namespace std;
 class FileCompressor {
 public:
-    static void compressFile(string &name, ofstream &outFile);
+    static bool compressFile(string &name, ofstream &outFile);
 };
 

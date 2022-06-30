@@ -1,10 +1,9 @@
 #include "FileCompressor.h"
 
-void FileCompressor::compressFile(string &name, ofstream &outFile) {
+bool FileCompressor::compressFile(string &name, ofstream &outFile) {
     ifstream inFile(name, ios::ate | ios::binary);
     if (!inFile.is_open()){
-        cout << "Fail" << endl;
-        return;
+        return false;
     }
     Writer::writeName(name, outFile);
     int fil_size = (int)inFile.tellg();
@@ -17,7 +16,6 @@ void FileCompressor::compressFile(string &name, ofstream &outFile) {
         inFile.seekg(i);
         inFile.read((char *) &current, sizeof(char));
         next = (char) inFile.peek();
-
         if (next != current || repeat >= LIMIT) {
             if (repeat == 1) {
                 help.push(current);
@@ -36,5 +34,5 @@ void FileCompressor::compressFile(string &name, ofstream &outFile) {
         repeat++;
     }
     Writer::writeElements(help, outFile);
-    cout << "Done" << endl;
+    return true;
 }

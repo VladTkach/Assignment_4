@@ -4,7 +4,7 @@
 #include <vector>
 #include <fstream>
 #include <queue>
-#include "FileCompressor.h"
+#include "CompressorResult.h"
 
 using namespace std;
 
